@@ -13,3 +13,4 @@
 </tr>
 </table>
 </form>
+<a href="../SignUp"><button tabindex='4' style='height:30px;width:300px'>회원가입</button></a>

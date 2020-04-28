@@ -18,14 +18,18 @@
     $id = $_POST['user_id']; //POST 들어온 id/pw name으로 설정
     $pw = $_POST['pw'];
 
-    $sql = "SELECT pw FROM tennis_user WHERE user_id = '$id'";
+    $sql = "SELECT pw, name FROM tennis_user WHERE user_id = '$id'";
 
-    $result = mysqli_query($connect, $sql);
+    $result = mysqli_query($connect, $sql) or die("에러 발생 1");
 
-    // result of sql query
-    if($result)
+    $count = mysqli_num_rows($result);
+
+    if($count==0){
+        echo "존재하지 않는 아이디입니다.";
+    }
+    else if($result) // result of sql query
     {
-        $row = mysqli_fetch_array($result);
+        $row = mysqli_fetch_array($result) or die("에러 발생 2");
         if(is_null($row['pw']))
         {
             echo "Can not find ID";
@@ -34,7 +38,10 @@
         {
             if($row['pw'] == $pw)
             {
-                echo "$row[pw]";
+                $_SESSION['user_id'] = $id;
+                $_SESSION['name'] = $row['name'];
+                echo "로그인 성공!";
+                header('location:../Room');
             }
             else
             {
