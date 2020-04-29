@@ -1,6 +1,6 @@
 <?php
     //POST로 user_id가 없거나 pw가 없을 경우 예외 처리
-    if(!isset($_POST['user_id']) || !isset($_POST['pw'])) exit;
+    if(!isset($_POST['user_id']) || !isset($_POST['pw'])) die("user_id, pw가 존재하지 않습니다.");
 
     header('content-type: text/html; charset=utf-8');
     // 데이터베이스 접속 문자열. (db위치, 유저 이름, 비밀번호)
@@ -40,8 +40,7 @@
             {
                 $_SESSION['user_id'] = $id;
                 $_SESSION['name'] = $row['name'];
-                echo "로그인 성공!";
-                header('location:../Room');
+                echo $_SESSION['name'];
             }
             else
             {
