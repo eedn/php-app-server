@@ -35,7 +35,7 @@
     // result of sql query
     if($result)
     {
-        echo "룸생성 완료!";
+        echo "1";
     }
     else
     {
