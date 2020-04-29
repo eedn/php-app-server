@@ -1,6 +1,9 @@
 <?php
+    // $raw_post_data = file_get_contents('php://input');
+    // echo $raw_post_data;
+
     //POST로 user_id가 없거나 pw나 name이 없을 경우 예외 처리
-    if(!isset($_POST['user_id']) || !isset($_POST['pw']) || !isset($_POST['name'])) exit;
+    if(!isset($_POST['user_id']) || !isset($_POST['pw']) || !isset($_POST['name'])) die("user_id, pw, name 중에 하나가 설정되지 않았습니다");
 
     header('content-type: text/html; charset=utf-8');
     // 데이터베이스 접속 문자열. (db위치, 유저 이름, 비밀번호)
@@ -35,10 +38,9 @@
     // result of sql query
     if($result)
     {
-        echo "회원가입 완료!";
+        echo "1";
         $_SESSION['user_id'] = $id;
         $_SESSION['name'] = $name;
-        header('location:../Room/');
     }
     else
     {
