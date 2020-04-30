@@ -12,6 +12,6 @@
 
 ?>
 
-<form method='post' action='../Room'>
+<form method='post' action='../Room/'>
     room_id 입력 : <input type='text' name='room_id'/> <input type='submit' value='room 입장'/>
 </form>
