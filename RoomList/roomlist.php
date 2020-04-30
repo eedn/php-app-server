@@ -42,7 +42,7 @@
             'place'=>$place
         ];
         
-        //pushing the array inside the hero array 
+        //pushing the array inside the result array 
         array_push($result, $temp);
     }
     
