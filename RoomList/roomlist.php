@@ -1,12 +1,12 @@
 <?php
     //세션 시작
     session_start();
-    if(!isset($_SESSION['user_id']) || !isset($_SESSION['name'])) die("에러발생1");
+    if(!isset($_SESSION['user_id']) || !isset($_SESSION['name'])) die("ERROR: 에러발생1");
 
     header('content-type: text/html; charset=utf-8');
     // 데이터베이스 접속 문자열. (db위치, 유저 이름, 비밀번호)
     $connect=mysqli_connect( "localhost:3306", "tennis", "tennis") or  
-    die( "SQL server에 연결할 수 없습니다.");
+    die( "ERROR: SQL server에 연결할 수 없습니다.");
 
     mysqli_query($connect,"SET NAMES UTF8");
     // 데이터베이스 선택

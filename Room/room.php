@@ -1,15 +1,15 @@
 <?php
     //POST로 user_id가 없거나 pw가 없을 경우 예외 처리
-    if(!isset($_POST['room_id'])) die("room_id가 보내지지 않았습니다.");
+    if(!isset($_POST['room_id'])) die("ERROR: room_id가 보내지지 않았습니다.");
 
     //세션 시작
     session_start();
-    if(!isset($_SESSION['user_id'])) die("user_id가 세션에 존재하지 않습니다.");
+    if(!isset($_SESSION['user_id'])) die("ERROR: user_id가 세션에 존재하지 않습니다.");
 
     header('content-type: text/html; charset=utf-8');
     // 데이터베이스 접속 문자열, (db위치, 유저이름, 비밀번호)
     $connect=mysqli_connect( "localhost:3306", "tennis", "tennis") or
-    die( "SQL server에 연결할 수 없습니다.");
+    die( "ERROR: SQL server에 연결할 수 없습니다.");
 
     mysqli_query($connect, "SET NAMES UTF8");
     //데이터베이스 선택
@@ -22,7 +22,7 @@
     //room 정보 쿼리
     $sql = "SELECT * from room WHERE room_id = '{$room_id}'";
 
-    $result = mysqli_query($connect, $sql) or die("에러발생1");
+    $result = mysqli_query($connect, $sql) or die("ERROR: 에러발생1");
 
     //room 결과값 존재여부 확인
     $count = mysqli_num_rows($result);
@@ -33,11 +33,11 @@
     //room 결과값 예외처리
     if(!$result)
     {
-        die(mysqli_errno($connect));
+        die("ERROR: mysql error number - ".mysqli_errno($connect));
     }
 
     //room 결과값 처리(연관배열)
-    $row = mysqli_fetch_assoc($result) or die("에러발생2");
+    $row = mysqli_fetch_assoc($result) or die("ERROR: 에러발생2");
     
     //video 정보 쿼리
     $sql = "SELECT video_id, file_path, result_path, team FROM video_data WHERE room_id = '{$room_id}'";

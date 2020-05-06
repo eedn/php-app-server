@@ -3,7 +3,7 @@
     header('content-type: text/html; charset=utf-8');
     // 데이터베이스 접속 문자열. (db위치, 유저 이름, 비밀번호)
     $connect=mysqli_connect( "localhost:3306", "tennis", "tennis") or  
-    die( "SQL server에 연결할 수 없습니다.");
+    die( "ERROR: SQL server에 연결할 수 없습니다.");
 
     mysqli_query($connect,"SET NAMES UTF8");
     // 데이터베이스 선택
@@ -11,7 +11,7 @@
 
     session_start();
     //세션에서 아이디 전달 못받을 경우, 예외처리.
-    if(!isset($_SESSION['user_id'])) die("세션 아이디가 존재하지 않습니다.");
+    if(!isset($_SESSION['user_id'])) die("ERROR: 세션 아이디가 존재하지 않습니다.");
     $id = $_SESSION['user_id'];
 
     //DB 보낼 INSERT query 준비.
@@ -31,9 +31,9 @@
             //존재하는 user_id인지 확인
             $sql = "SELECT user_id FROM tennis_user WHERE user_id = '{$tmp}'";
 
-            $result = mysqli_query($connect, $sql) or die("에러 발생 1");
+            $result = mysqli_query($connect, $sql) or die("ERROR: 에러 발생 1");
             $count = mysqli_num_rows($result);
-            if($count != 1) die("{$tmp} 는 존재하지 않는 아이디 입니다.");
+            if($count != 1) die("ERROR: {$tmp} 는 존재하지 않는 아이디 입니다.");
         }
     }
     $day = "NULL";
@@ -55,7 +55,7 @@
     }
     else
     {
-        die("에러 발생2");
+        die("ERROR: 에러 발생2");
         // echo mysqli_errno($connect);
     }
 
