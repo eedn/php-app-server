@@ -40,7 +40,7 @@
     $row = mysqli_fetch_assoc($result) or die("에러발생2");
     
     //video 정보 쿼리
-    $sql = "SELECT video_id, file_path, result_path FROM video_data WHERE room_id = '{$room_id}'";
+    $sql = "SELECT video_id, file_path, result_path, team FROM video_data WHERE room_id = '{$room_id}'";
 
     //stmt 생성. 
     $stmt = $connect->prepare($sql);
@@ -49,7 +49,7 @@
     $stmt->execute();
 
     //video 변수 바인딩
-    $stmt->bind_result($video_id, $file_path, $result_path);
+    $stmt->bind_result($video_id, $file_path, $result_path, $team);
     
     $i = 1;
     while($stmt->fetch())
@@ -58,7 +58,8 @@
         $temp = [
             'video_id'=>$video_id,
             'file_path'=>$file_path,
-            'result_path'=>$result_path
+            'result_path'=>$result_path,
+            'team'=>$team
         ];
 
         //결과 배열에 데이터 저장

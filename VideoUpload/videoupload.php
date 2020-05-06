@@ -2,6 +2,7 @@
 	header('content-type: text/html; charset=utf-8');
 	//POST로 room_id가 없을 경우 예외 처리
 	if(!isset($_POST['room_id'])) die("room_id가 보내지지 않았습니다.");
+	if(!isset($_POST['team'])) die("team이 보내지지 않았습니다.");
 	//세션 없을경우 예외 처리
 	session_start();
 	if(!isset($_SESSION['user_id'])) die("세션이 연결되지 않았습니다.");
@@ -10,6 +11,7 @@
 	//변수 정리
 	$user_id = $_SESSION['user_id'];
 	$room_id = $_POST['room_id'];
+	$team = $_POST['team'];
 	$current_dir = $_SERVER['PHP_SELF']."/../"; //현재 디렉토리
 
 	//도메인주소(호스트명)
@@ -41,7 +43,7 @@
 	mysqli_select_db($connect,"tennis");
 	
 	//데이터베이스에 file_path 저장
-    $sql = "INSERT INTO video_data (file_path, room_id, user_id) VALUES ('{$file_path}', '{$room_id}', '{$user_id}')";
+    $sql = "INSERT INTO video_data (file_path, room_id, user_id, team) VALUES ('{$file_path}', '{$room_id}', '{$user_id}', '{$team}')";
 	$result = mysqli_query($connect, $sql);
 	if($result)
 	{
