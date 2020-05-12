@@ -51,7 +51,7 @@
     }
     else
     {
-        die("ERROR: mysql error number - ".mysqli_errno($connect));
+        die("ERROR: mysql error number - ".mysqli_errno($connect)); // 에러
     }
 
     mysqli_close($connect);
